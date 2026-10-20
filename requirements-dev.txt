@@ -1,0 +1,6 @@
+# Run the pipeline and tests without Airflow/Docker:  pip install -r requirements-dev.txt
+pandas>=2.2
+psycopg2-binary>=2.9
+pytest>=8
+ruff>=0.6
+requests>=2.31   # superset/build_dashboards.py, superset/verify_kpis.py

@@ -1,0 +1,31 @@
+slice_name: Top categories
+description: ''
+certified_by: null
+certification_details: null
+viz_type: table
+params:
+  datasource: 28__table
+  viz_type: table
+  time_range: No filter
+  adhoc_filters: []
+  query_mode: aggregate
+  groupby:
+  - category
+  metrics:
+  - incidents
+  - median_resolution_hours
+  - sla_met_pct
+  - first_contact_resolution_pct
+  - avg_reassignments
+  timeseries_limit_metric: incidents
+  order_desc: true
+  row_limit: 100
+  server_page_length: 10
+  include_search: true
+  table_timestamp_format: '%Y-%m-%d %H:%M'
+  show_cell_bars: false
+query_context: null
+cache_timeout: null
+uuid: ac077071-3b54-432b-af23-33da094607b1
+version: 1.0.0
+dataset_uuid: f127e4d0-dca1-4653-9481-2b6a0d5a7744

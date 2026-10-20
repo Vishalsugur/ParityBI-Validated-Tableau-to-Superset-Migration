@@ -1,0 +1,31 @@
+slice_name: SLA met by number of handoffs (%, from 16 Mar)
+description: ''
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_bar
+params:
+  datasource: 30__table
+  viz_type: echarts_timeseries_bar
+  time_range: No filter
+  adhoc_filters: []
+  x_axis: reassignment_bucket
+  metrics:
+  - expressionType: SQL
+    sqlExpression: MAX(sla_met_pct_from_16_mar)
+    label: SLA met (%)
+  groupby: []
+  row_limit: 100
+  orientation: vertical
+  x_axis_sort: reassignment_bucket
+  x_axis_sort_asc: true
+  show_legend: false
+  legendOrientation: top
+  y_axis_format: ',.1f'
+  show_value: true
+  rich_tooltip: true
+  truncate_metric: true
+query_context: null
+cache_timeout: null
+uuid: 9cf00be5-ce12-482c-a1a5-94279cd55eeb
+version: 1.0.0
+dataset_uuid: 1c9d37a6-e6d9-4715-81c0-b6492cc6bd54

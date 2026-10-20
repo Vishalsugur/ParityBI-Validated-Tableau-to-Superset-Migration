@@ -1,0 +1,5 @@
+# Already in the official image, listed so the dependency is explicit
+apache-airflow-providers-postgres
+apache-airflow-providers-common-sql
+psycopg2-binary
+pandas

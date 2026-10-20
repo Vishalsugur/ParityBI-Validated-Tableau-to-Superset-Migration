@@ -1,0 +1,35 @@
+slice_name: SLA met & first-contact resolution per week (%)
+description: ''
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_line
+params:
+  datasource: 28__table
+  viz_type: echarts_timeseries_line
+  time_range: No filter
+  adhoc_filters: []
+  x_axis: opened_at
+  time_grain_sqla: P1W
+  metrics:
+  - sla_met_pct
+  - first_contact_resolution_pct
+  groupby: []
+  row_limit: 10000
+  order_desc: true
+  truncate_metric: true
+  show_legend: true
+  legendOrientation: top
+  rich_tooltip: true
+  y_axis_format: ',.1f'
+  x_axis_time_format: '%d %b'
+  markerEnabled: true
+  zoomable: false
+  comparison_type: values
+  y_axis_bounds:
+  - 0
+  - 100
+query_context: null
+cache_timeout: null
+uuid: 78b31cda-6af5-4046-923a-d776408a2e21
+version: 1.0.0
+dataset_uuid: f127e4d0-dca1-4653-9481-2b6a0d5a7744

@@ -1,0 +1,31 @@
+slice_name: Where to write knowledge articles first
+description: ''
+certified_by: null
+certification_details: null
+viz_type: table
+params:
+  datasource: 31__table
+  viz_type: table
+  time_range: No filter
+  adhoc_filters: []
+  query_mode: raw
+  all_columns:
+  - documentation_priority_rank
+  - category
+  - incidents
+  - handoff_incidents
+  - first_contact_resolution_pct
+  - avg_reassignments
+  - median_resolution_hours
+  order_by_cols:
+  - '["documentation_priority_rank", true]'
+  row_limit: 100
+  server_page_length: 10
+  include_search: true
+  table_timestamp_format: '%Y-%m-%d %H:%M'
+  show_cell_bars: false
+query_context: null
+cache_timeout: null
+uuid: 1769b714-71f8-4fc3-ace7-3cce42b95acb
+version: 1.0.0
+dataset_uuid: 4197ff9b-5ab4-4cc4-9393-b5f0e89f7553

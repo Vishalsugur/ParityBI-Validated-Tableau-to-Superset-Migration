@@ -1,0 +1,23 @@
+slice_name: KPI comparisons passed
+description: ''
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 34__table
+  viz_type: big_number_total
+  time_range: No filter
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: SUM(CASE WHEN passed THEN 1 ELSE 0 END)
+    label: Passed
+  y_axis_format: ',.0f'
+  subheader: legacy Tableau logic vs new SQL
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+query_context: null
+cache_timeout: null
+uuid: caebba6f-cf24-4e26-8aaf-ef401309b85a
+version: 1.0.0
+dataset_uuid: fab0064c-b675-4a5e-ae4f-69e613ab3e59

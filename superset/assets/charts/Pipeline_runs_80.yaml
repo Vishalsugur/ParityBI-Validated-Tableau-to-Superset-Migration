@@ -1,0 +1,31 @@
+slice_name: Pipeline runs
+description: ''
+certified_by: null
+certification_details: null
+viz_type: table
+params:
+  datasource: 36__table
+  viz_type: table
+  time_range: No filter
+  adhoc_filters: []
+  query_mode: raw
+  all_columns:
+  - started_at
+  - status
+  - raw_rows
+  - incidents
+  - dq_checks_failed
+  - kpi_checks_failed
+  - run_id
+  order_by_cols:
+  - '["started_at", false]'
+  row_limit: 100
+  server_page_length: 10
+  include_search: true
+  table_timestamp_format: '%Y-%m-%d %H:%M'
+  show_cell_bars: false
+query_context: null
+cache_timeout: null
+uuid: 7ae31e7c-b484-4f05-84f9-3e8291d4b2e5
+version: 1.0.0
+dataset_uuid: c7fb9e65-3c3b-4743-9c7e-1072c0a8fe33

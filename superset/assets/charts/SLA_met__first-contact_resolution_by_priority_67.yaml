@@ -1,0 +1,30 @@
+slice_name: SLA met & first-contact resolution by priority (%)
+description: ''
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_bar
+params:
+  datasource: 28__table
+  viz_type: echarts_timeseries_bar
+  time_range: No filter
+  adhoc_filters: []
+  x_axis: priority
+  metrics:
+  - sla_met_pct
+  - first_contact_resolution_pct
+  groupby: []
+  row_limit: 100
+  orientation: vertical
+  x_axis_sort: priority
+  x_axis_sort_asc: true
+  show_legend: true
+  legendOrientation: top
+  y_axis_format: ',.1f'
+  show_value: true
+  rich_tooltip: true
+  truncate_metric: true
+query_context: null
+cache_timeout: null
+uuid: 7f9d25c9-ef23-41a6-90b4-adf2353c3985
+version: 1.0.0
+dataset_uuid: f127e4d0-dca1-4653-9481-2b6a0d5a7744

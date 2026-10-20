@@ -1,0 +1,45 @@
+-- Landing table for the UCI / ServiceNow incident event log.
+-- Every column is text: nothing is interpreted at load time, so a bad value
+-- never breaks the load. Typing and cleaning happen in staging.
+drop table if exists raw.incident_events;
+
+create table raw.incident_events (
+    source_row_number        bigint generated always as identity,
+    number                   text,
+    incident_state           text,
+    active                   text,
+    reassignment_count       text,
+    reopen_count             text,
+    sys_mod_count            text,
+    made_sla                 text,
+    caller_id                text,
+    opened_by                text,
+    opened_at                text,
+    sys_created_by           text,
+    sys_created_at           text,
+    sys_updated_by           text,
+    sys_updated_at           text,
+    contact_type             text,
+    location                 text,
+    category                 text,
+    subcategory              text,
+    u_symptom                text,
+    cmdb_ci                  text,
+    impact                   text,
+    urgency                  text,
+    priority                 text,
+    assignment_group         text,
+    assigned_to              text,
+    knowledge                text,
+    u_priority_confirmation  text,
+    notify                   text,
+    problem_id               text,
+    rfc                      text,
+    vendor                   text,
+    caused_by                text,
+    closed_code              text,
+    resolved_by              text,
+    resolved_at              text,
+    closed_at                text,
+    loaded_at                timestamptz not null default now()
+);

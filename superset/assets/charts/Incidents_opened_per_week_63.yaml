@@ -1,0 +1,31 @@
+slice_name: Incidents opened per week
+description: ''
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_bar
+params:
+  datasource: 28__table
+  viz_type: echarts_timeseries_bar
+  time_range: No filter
+  adhoc_filters: []
+  x_axis: opened_at
+  time_grain_sqla: P1W
+  metrics:
+  - incidents
+  groupby: []
+  row_limit: 10000
+  order_desc: true
+  truncate_metric: true
+  show_legend: false
+  legendOrientation: top
+  rich_tooltip: true
+  y_axis_format: ',.0f'
+  x_axis_time_format: '%d %b'
+  markerEnabled: false
+  zoomable: false
+  comparison_type: values
+query_context: null
+cache_timeout: null
+uuid: 6aa98616-ab49-40f1-9815-3038af5c2cf4
+version: 1.0.0
+dataset_uuid: f127e4d0-dca1-4653-9481-2b6a0d5a7744

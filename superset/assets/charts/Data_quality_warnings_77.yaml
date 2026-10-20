@@ -1,0 +1,23 @@
+slice_name: Data quality warnings
+description: ''
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 35__table
+  viz_type: big_number_total
+  time_range: No filter
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: SUM(CASE WHEN NOT passed AND severity = 'warn' THEN 1 ELSE 0 END)
+    label: Warnings
+  y_axis_format: ',.0f'
+  subheader: known source issues, documented
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+query_context: null
+cache_timeout: null
+uuid: f4593d64-1496-4212-8a69-3915fb254a2c
+version: 1.0.0
+dataset_uuid: bd8c94b3-525b-46b8-8d8d-43dfb78bba8d

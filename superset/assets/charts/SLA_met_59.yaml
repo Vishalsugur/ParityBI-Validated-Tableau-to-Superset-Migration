@@ -1,0 +1,20 @@
+slice_name: SLA met (%)
+description: ''
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 28__table
+  viz_type: big_number_total
+  time_range: No filter
+  adhoc_filters: []
+  metric: sla_met_pct
+  y_axis_format: ',.1f'
+  subheader: '% of incidents'
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+query_context: null
+cache_timeout: null
+uuid: e3bde40d-54a5-4e3c-bf61-6e47a332fce4
+version: 1.0.0
+dataset_uuid: f127e4d0-dca1-4653-9481-2b6a0d5a7744

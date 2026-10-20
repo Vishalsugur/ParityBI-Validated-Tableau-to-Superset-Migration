@@ -1,0 +1,31 @@
+slice_name: Data quality checks (latest run)
+description: ''
+certified_by: null
+certification_details: null
+viz_type: table
+params:
+  datasource: 35__table
+  viz_type: table
+  time_range: No filter
+  adhoc_filters: []
+  query_mode: raw
+  all_columns:
+  - result
+  - layer
+  - check_name
+  - severity
+  - failed_rows
+  - description
+  order_by_cols:
+  - '["passed", true]'
+  - '["layer", false]'
+  row_limit: 100
+  server_page_length: 20
+  include_search: true
+  table_timestamp_format: '%Y-%m-%d %H:%M'
+  show_cell_bars: false
+query_context: null
+cache_timeout: null
+uuid: c8c8c159-4d3e-4e9b-a481-a88dd4a594c7
+version: 1.0.0
+dataset_uuid: bd8c94b3-525b-46b8-8d8d-43dfb78bba8d

@@ -1,0 +1,23 @@
+slice_name: KPI comparisons failed
+description: ''
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 34__table
+  viz_type: big_number_total
+  time_range: No filter
+  adhoc_filters: []
+  metric:
+    expressionType: SQL
+    sqlExpression: SUM(CASE WHEN passed THEN 0 ELSE 1 END)
+    label: Failed
+  y_axis_format: ',.0f'
+  subheader: must be 0
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+query_context: null
+cache_timeout: null
+uuid: 4901b667-79d1-4066-87da-932ed7d5f228
+version: 1.0.0
+dataset_uuid: fab0064c-b675-4a5e-ae4f-69e613ab3e59

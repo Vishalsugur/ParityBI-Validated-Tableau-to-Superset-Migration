@@ -1,0 +1,20 @@
+slice_name: First-contact resolution (%)
+description: ''
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 28__table
+  viz_type: big_number_total
+  time_range: No filter
+  adhoc_filters: []
+  metric: first_contact_resolution_pct
+  y_axis_format: ',.1f'
+  subheader: no reassignment, no reopen
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+query_context: null
+cache_timeout: null
+uuid: f882d8b1-2b7d-4ff5-8d7e-edddc5f13d92
+version: 1.0.0
+dataset_uuid: f127e4d0-dca1-4653-9481-2b6a0d5a7744

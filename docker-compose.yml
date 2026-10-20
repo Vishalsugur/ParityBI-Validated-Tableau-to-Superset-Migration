@@ -1,0 +1,158 @@
+# Service Desk BI migration - local stack
+#
+#   docker compose up -d --build
+#
+#   Airflow   http://localhost:8080   (user/password from .env, default airflow / airflow)
+#   Superset  http://localhost:8088   (default admin / admin)
+#   Postgres  localhost:5432          (warehouse 'servicedesk', user analytics / analytics;
+#                                      set POSTGRES_PORT in .env if 5432 is taken)
+#
+# Light-weight on purpose (LocalExecutor, no Redis/Celery) so it runs on a laptop
+# with ~4 GB of memory available to Docker. Based on the official Airflow 3.3
+# docker-compose reference and the official Superset 6.1 image.
+
+x-airflow-common: &airflow-common
+  build: ./airflow
+  image: servicedesk-airflow:3.3.2
+  environment: &airflow-common-env
+    AIRFLOW__CORE__EXECUTOR: LocalExecutor
+    AIRFLOW__CORE__AUTH_MANAGER: airflow.providers.fab.auth_manager.fab_auth_manager.FabAuthManager
+    AIRFLOW__DATABASE__SQL_ALCHEMY_CONN: postgresql+psycopg2://airflow:${AIRFLOW_DB_PASSWORD:-airflow}@postgres/airflow
+    AIRFLOW__CORE__FERNET_KEY: ${AIRFLOW_FERNET_KEY:-}
+    AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "false"   # the pipeline runs once right after start-up
+    AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+    AIRFLOW__CORE__EXECUTION_API_SERVER_URL: http://airflow-apiserver:8080/execution/
+    AIRFLOW__API_AUTH__JWT_SECRET: ${AIRFLOW_JWT_SECRET:-change-me-local-jwt-secret}
+    AIRFLOW__API_AUTH__JWT_ISSUER: airflow
+    AIRFLOW__SCHEDULER__ENABLE_HEALTH_CHECK: "true"
+    # Warehouse connection used by the DAG (Airflow reads AIRFLOW_CONN_<ID> automatically)
+    AIRFLOW_CONN_WAREHOUSE: postgresql://analytics:${WAREHOUSE_PASSWORD:-analytics}@postgres:5432/servicedesk
+    PROJECT_DIR: /opt/project
+    PYTHONPATH: /opt/project
+  volumes:
+    - ./airflow/dags:/opt/airflow/dags
+    - ./airflow/logs:/opt/airflow/logs
+    - ./:/opt/project
+  user: "${AIRFLOW_UID:-50000}:0"
+  depends_on: &airflow-common-depends-on
+    postgres:
+      condition: service_healthy
+
+services:
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-postgres}
+      AIRFLOW_DB_PASSWORD: ${AIRFLOW_DB_PASSWORD:-airflow}
+      SUPERSET_DB_PASSWORD: ${SUPERSET_DB_PASSWORD:-superset}
+      WAREHOUSE_PASSWORD: ${WAREHOUSE_PASSWORD:-analytics}
+      READER_PASSWORD: ${READER_PASSWORD:-reader}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+      - ./docker/postgres-init:/docker-entrypoint-initdb.d:ro
+    ports:
+      - "${POSTGRES_PORT:-5432}:5432"
+    healthcheck:
+      test: ["CMD", "pg_isready", "-U", "postgres"]
+      interval: 10s
+      retries: 5
+      start_period: 5s
+    restart: always
+
+  airflow-init:
+    <<: *airflow-common
+    entrypoint: /bin/bash
+    command:
+      - -c
+      - |
+        mkdir -p /opt/airflow/logs /opt/project/data/raw /opt/project/exports/tableau
+        chown -R "${AIRFLOW_UID:-50000}:0" /opt/airflow/logs /opt/project/data /opt/project/exports /opt/project/validation
+        /entrypoint airflow version
+    environment:
+      <<: *airflow-common-env
+      _AIRFLOW_DB_MIGRATE: "true"
+      _AIRFLOW_WWW_USER_CREATE: "true"
+      _AIRFLOW_WWW_USER_USERNAME: ${AIRFLOW_ADMIN_USER:-airflow}
+      _AIRFLOW_WWW_USER_PASSWORD: ${AIRFLOW_ADMIN_PASSWORD:-airflow}
+    user: "0:0"
+
+  airflow-apiserver:
+    <<: *airflow-common
+    command: api-server
+    ports:
+      - "8080:8080"
+    healthcheck:
+      test: ["CMD", "curl", "--fail", "http://localhost:8080/api/v2/monitor/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-scheduler:
+    <<: *airflow-common
+    command: scheduler
+    healthcheck:
+      test: ["CMD-SHELL", 'airflow jobs check --job-type SchedulerJob --hostname "$${HOSTNAME}"']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  airflow-dag-processor:
+    <<: *airflow-common
+    command: dag-processor
+    healthcheck:
+      test: ["CMD-SHELL", 'airflow jobs check --job-type DagProcessorJob --hostname "$${HOSTNAME}"']
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+    restart: always
+    depends_on:
+      <<: *airflow-common-depends-on
+      airflow-init:
+        condition: service_completed_successfully
+
+  superset-init:
+    build: ./superset
+    image: servicedesk-superset:6.1.0
+    command: ["/bin/bash", "/app/init.sh"]
+    environment: &superset-env
+      SUPERSET_SECRET_KEY: ${SUPERSET_SECRET_KEY:?Set SUPERSET_SECRET_KEY in .env (see .env.example)}
+      SUPERSET_METADATA_DB_URI: postgresql+psycopg2://superset:${SUPERSET_DB_PASSWORD:-superset}@postgres:5432/superset
+      SUPERSET_WAREHOUSE_URI: postgresql+psycopg2://superset_reader:${READER_PASSWORD:-reader}@postgres:5432/servicedesk
+      SUPERSET_ADMIN_USER: ${SUPERSET_ADMIN_USER:-admin}
+      SUPERSET_ADMIN_PASSWORD: ${SUPERSET_ADMIN_PASSWORD:-admin}
+    volumes: &superset-volumes
+      - ./superset/superset_config.py:/app/pythonpath/superset_config.py:ro
+      - ./superset/assets:/app/assets:ro
+      - ./superset/init.sh:/app/init.sh:ro
+    depends_on:
+      postgres:
+        condition: service_healthy
+
+  superset:
+    build: ./superset
+    image: servicedesk-superset:6.1.0
+    environment: *superset-env
+    volumes: *superset-volumes
+    ports:
+      - "8088:8088"
+    restart: always
+    depends_on:
+      superset-init:
+        condition: service_completed_successfully
+
+volumes:
+  postgres-data:

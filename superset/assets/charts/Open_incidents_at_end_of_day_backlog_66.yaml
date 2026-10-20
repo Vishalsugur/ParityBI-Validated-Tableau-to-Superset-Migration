@@ -1,0 +1,33 @@
+slice_name: Open incidents at end of day (backlog)
+description: ''
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_line
+params:
+  datasource: 29__table
+  viz_type: echarts_timeseries_line
+  time_range: No filter
+  adhoc_filters: []
+  x_axis: date_day
+  time_grain_sqla: P1D
+  metrics:
+  - expressionType: SQL
+    sqlExpression: MAX(open_at_end_of_day)
+    label: Open incidents
+  groupby: []
+  row_limit: 10000
+  order_desc: true
+  truncate_metric: true
+  show_legend: false
+  legendOrientation: top
+  rich_tooltip: true
+  y_axis_format: ',.0f'
+  x_axis_time_format: '%d %b'
+  markerEnabled: false
+  zoomable: false
+  comparison_type: values
+query_context: null
+cache_timeout: null
+uuid: afc772c0-e462-4ed1-982b-84ff18820dd8
+version: 1.0.0
+dataset_uuid: 93a7d051-f518-45da-8434-14f074690374

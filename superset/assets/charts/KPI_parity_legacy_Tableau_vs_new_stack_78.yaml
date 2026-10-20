@@ -1,0 +1,35 @@
+slice_name: 'KPI parity: legacy Tableau vs new stack'
+description: ''
+certified_by: null
+certification_details: null
+viz_type: table
+params:
+  datasource: 34__table
+  viz_type: table
+  time_range: No filter
+  adhoc_filters: []
+  query_mode: raw
+  all_columns:
+  - result
+  - grain
+  - grain_value
+  - kpi
+  - legacy_value
+  - new_value
+  - abs_diff
+  - tolerance
+  - reference
+  order_by_cols:
+  - '["passed", true]'
+  - '["grain", true]'
+  - '["grain_value", true]'
+  row_limit: 1000
+  server_page_length: 12
+  include_search: true
+  table_timestamp_format: '%Y-%m-%d %H:%M'
+  show_cell_bars: false
+query_context: null
+cache_timeout: null
+uuid: 960795fe-43c3-46da-83b4-77fc42fa0048
+version: 1.0.0
+dataset_uuid: fab0064c-b675-4a5e-ae4f-69e613ab3e59

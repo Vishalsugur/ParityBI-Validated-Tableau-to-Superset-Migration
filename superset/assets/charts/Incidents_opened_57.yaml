@@ -1,0 +1,20 @@
+slice_name: Incidents opened
+description: ''
+certified_by: null
+certification_details: null
+viz_type: big_number_total
+params:
+  datasource: 28__table
+  viz_type: big_number_total
+  time_range: No filter
+  adhoc_filters: []
+  metric: incidents
+  y_axis_format: ',.0f'
+  subheader: in analysis window
+  header_font_size: 0.4
+  subheader_font_size: 0.15
+query_context: null
+cache_timeout: null
+uuid: 05e7716c-86e9-4a94-b3d5-b0602768a725
+version: 1.0.0
+dataset_uuid: f127e4d0-dca1-4653-9481-2b6a0d5a7744

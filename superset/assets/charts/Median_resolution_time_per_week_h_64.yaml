@@ -1,0 +1,31 @@
+slice_name: Median resolution time per week (h)
+description: ''
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_line
+params:
+  datasource: 28__table
+  viz_type: echarts_timeseries_line
+  time_range: No filter
+  adhoc_filters: []
+  x_axis: opened_at
+  time_grain_sqla: P1W
+  metrics:
+  - median_resolution_hours
+  groupby: []
+  row_limit: 10000
+  order_desc: true
+  truncate_metric: true
+  show_legend: false
+  legendOrientation: top
+  rich_tooltip: true
+  y_axis_format: ',.1f'
+  x_axis_time_format: '%d %b'
+  markerEnabled: true
+  zoomable: false
+  comparison_type: values
+query_context: null
+cache_timeout: null
+uuid: 7ab804b6-5839-4aed-8f58-9f7822764da8
+version: 1.0.0
+dataset_uuid: f127e4d0-dca1-4653-9481-2b6a0d5a7744

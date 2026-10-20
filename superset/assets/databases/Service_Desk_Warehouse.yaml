@@ -1,0 +1,18 @@
+database_name: Service Desk Warehouse
+sqlalchemy_uri: postgresql+psycopg2://superset_reader:XXXXXXXXXX@postgres:5432/servicedesk
+cache_timeout: null
+expose_in_sqllab: true
+allow_run_async: false
+allow_ctas: false
+allow_cvas: false
+allow_dml: false
+allow_file_upload: false
+extra:
+  metadata_params: {}
+  engine_params: {}
+  metadata_cache_timeout: {}
+  schemas_allowed_for_file_upload: []
+impersonate_user: false
+configuration_method: sqlalchemy_form
+uuid: 3917ac32-e20f-4bfc-a8c6-84ec3b377f26
+version: 1.0.0

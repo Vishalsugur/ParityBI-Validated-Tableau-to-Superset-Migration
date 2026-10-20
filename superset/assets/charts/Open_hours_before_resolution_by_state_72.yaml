@@ -1,0 +1,34 @@
+slice_name: Open hours before resolution, by state
+description: ''
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_bar
+params:
+  datasource: 32__table
+  viz_type: echarts_timeseries_bar
+  time_range: No filter
+  adhoc_filters:
+  - expressionType: SQL
+    clause: WHERE
+    sqlExpression: incident_state NOT IN ('Resolved', 'Closed')
+  x_axis: incident_state
+  metrics:
+  - expressionType: SQL
+    sqlExpression: SUM(total_hours)
+    label: Hours
+  groupby: []
+  row_limit: 100
+  orientation: horizontal
+  x_axis_sort: Hours
+  x_axis_sort_asc: true
+  show_legend: false
+  legendOrientation: top
+  y_axis_format: ',.0f'
+  show_value: true
+  rich_tooltip: true
+  truncate_metric: true
+query_context: null
+cache_timeout: null
+uuid: b9f880a7-36e4-4f72-8ed0-eac5fb9b159c
+version: 1.0.0
+dataset_uuid: 0af40eb0-b47d-44a3-b35f-220b3a3f852d

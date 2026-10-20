@@ -1,0 +1,39 @@
+slice_name: Daily share flagged 'knowledge used' vs 'SLA met' (%)
+description: ''
+certified_by: null
+certification_details: null
+viz_type: echarts_timeseries_line
+params:
+  datasource: 33__table
+  viz_type: echarts_timeseries_line
+  time_range: No filter
+  adhoc_filters: []
+  x_axis: date_day
+  time_grain_sqla: P1D
+  metrics:
+  - expressionType: SQL
+    sqlExpression: MAX(kb_flag_pct)
+    label: Knowledge used (%)
+  - expressionType: SQL
+    sqlExpression: MAX(sla_met_pct)
+    label: SLA met (%)
+  groupby: []
+  row_limit: 10000
+  order_desc: true
+  truncate_metric: true
+  show_legend: true
+  legendOrientation: top
+  rich_tooltip: true
+  y_axis_format: ',.0f'
+  x_axis_time_format: '%d %b'
+  markerEnabled: false
+  zoomable: false
+  comparison_type: values
+  y_axis_bounds:
+  - 0
+  - 100
+query_context: null
+cache_timeout: null
+uuid: ada96ede-011b-4a96-ac51-27e5142fd790
+version: 1.0.0
+dataset_uuid: c9c9e7dc-fb00-4371-919b-904c02cc7051
